@@ -18,13 +18,12 @@ const Notepad = ({ title: defaultTitle, data, onSave }) => {
   };
 
   const handleInputChange = (e) => {
-    setContent(e.target.innerHTML);
+    setContent(e.target.value);
   };
 
   const handleSaveClick = () => {
     onSave(title, content);
     alert(`"${title}" has been saved to local storage.`);
-    console.log(handleSaveClick)
   };
 
   const handleFormatClick = (format) => {
@@ -94,13 +93,12 @@ const Notepad = ({ title: defaultTitle, data, onSave }) => {
         onChange={handleTitleChange}
         placeholder="Enter a title"
       />
-      <div
+      <textarea
         className="notepad-container"
-        contentEditable
-        onInput={handleInputChange}
+        onChange={handleInputChange}
         style={inlineStyle}
-        dangerouslySetInnerHTML={{ __html: content }}
-      ></div>
+        value={content}
+      />
       <button onClick={handleSaveClick}>Save</button>
     </div>
   );
