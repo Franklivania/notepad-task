@@ -6,9 +6,9 @@ const Navbar = () => {
   return (
     <nav>
 
-        <Link to="/">Notepad</Link>
+        <Link to="/" className='link'>Notepad</Link>
 
-        <Link to="/saved">Saved Notepads</Link>
+        <Link to="/saved" className='link'>Saved Notepads</Link>
 
     </nav>
   )

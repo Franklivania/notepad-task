@@ -20,19 +20,27 @@ const SavedNotepads = () => {
   };
 
   const handleNotepadSave = (title, content) => {
-    const newNotepads = [...notepads];
-    const existingNotepadIndex = newNotepads.findIndex(
+    const newNotepad = {
+      title,
+      content,
+      date: new Date().toLocaleString()
+    };
+
+    const existingNotepadIndex = notepads.findIndex(
       (notepad) => notepad.title === title
     );
 
     if (existingNotepadIndex >= 0) {
-      newNotepads[existingNotepadIndex] = { title, content };
+      const newNotepads = [...notepads];
+      newNotepads[existingNotepadIndex] = newNotepad;
+      localStorage.setItem("notepads", JSON.stringify(newNotepads));
+      setNotepads(newNotepads);
     } else {
-      newNotepads.push({ title, content });
+      const newNotepads = [...notepads, newNotepad];
+      localStorage.setItem("notepads", JSON.stringify(newNotepads));
+      setNotepads(newNotepads);
     }
 
-    localStorage.setItem("notepads", JSON.stringify(newNotepads));
-    setNotepads(newNotepads);
     setSelectedNotepad(null);
 
     alert("Notepad has been saved to local storage.");
@@ -48,21 +56,25 @@ const SavedNotepads = () => {
             className="notepad-list-item"
             onClick={() => handleNotepadClick(notepad)}
           >
-            {notepad.title}
+            <div className="notepad-title">{notepad.title}</div>
+            <div className="notepad-date">{notepad.date}</div>
           </div>
         ))}
       </div>
       {selectedNotepad && (
         <div className="notepad-modal">
           <div className="notepad-modal-content">
-            <button className="close-button" onClick={handleModalClose}>
-              X
-            </button>
-            <Notepad
-              title={selectedNotepad.title}
-              data={selectedNotepad.content}
-              onSave={handleNotepadSave}
-            />
+            <div className="notepad-modal-header">
+              <h2>{selectedNotepad.title}</h2>
+              <button onClick={handleModalClose}>Close</button>
+            </div>
+            <div className="notepad-modal-body">
+              <Notepad
+                title={selectedNotepad.title}
+                data={selectedNotepad.content}
+                onSave={handleNotepadSave}
+              />
+            </div>
           </div>
         </div>
       )}

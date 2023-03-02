@@ -1,9 +1,73 @@
 @import '../../App.scss';
 
 .notepad{
+    position: relative;
+    width: $width;
+    display: flex;
+    flex-direction: column;
+    font-family: $font;
 
+    input, button{
+        border: none;
+        resize: none;
+        outline: none;
+    }
+
+    .notepad-toolbar{
+        width: $width;
+        display: flex;
+        align-items: center;
+
+        button{
+            margin: 0 1rem;
+            padding: 0.5rem 1rem;
+            background: $color-one;
+            color: $secondary-color;
+
+            &:hover{
+                transform: translate(2%);
+                box-shadow: -0.1rem 0.1rem 0 $green;
+                color: $green;
+            }
+        }
+    }
+
+    .title{
+        width: calc(($width) * 0.4);
+        border-bottom: 0.02rem solid $primary-color;
+        margin: 1rem;
+        font-size: $large-font;
+        background: none;
+        color: $secondary-color;
+        padding: 0.03rem 1rem;
+    }
 
     .notepad-container{
-        border: 0.02rem solid black;
+        border: 0.02rem solid $primary-color;
+        height: calc(($height) * 0.7);
+        margin: 2rem;
+        resize: none;
+        outline: none;
+        border: none;
+        padding: 1rem;
+        font-family: $font;
+        font-size: $normal-size;
+        background: rgba($primary-color, 0.4);
+        color: $secondary-color;
+        border-radius: $border-radius;
+    }
+
+    .save{
+        width: calc(($width) * 0.2);
+        padding: 0.6rem 0;
+        align-self: center;
+        background: $color-one;
+        color: $secondary-color;
+
+        &:hover{
+            transform: translate(2%);
+            box-shadow: -0.3rem 0.3rem 0 $green;
+            color: $green;
+        }
     }
 }

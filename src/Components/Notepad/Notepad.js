@@ -75,6 +75,13 @@ const Notepad = ({ title: defaultTitle, data, onSave }) => {
 
   return (
     <div className="notepad">
+        <input
+            type="text"
+            value={title}
+            onChange={handleTitleChange}
+            placeholder="Enter a title"
+            className="title"
+        />
       <div className="notepad-toolbar">
         {formatButtons.map((button) => (
           <button
@@ -87,19 +94,14 @@ const Notepad = ({ title: defaultTitle, data, onSave }) => {
         ))}
         <input type="file" accept="image/*" onChange={handleImageUpload} />
       </div>
-      <input
-        type="text"
-        value={title}
-        onChange={handleTitleChange}
-        placeholder="Enter a title"
-      />
+      
       <textarea
         className="notepad-container"
         onChange={handleInputChange}
         style={inlineStyle}
         value={content}
       />
-      <button onClick={handleSaveClick}>Save</button>
+      <button onClick={handleSaveClick} className='save'>Save</button>
     </div>
   );
 };
